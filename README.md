@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# CSE421 : Pokemon Catch Simulator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created for the class CSE421.
 
-## Available Scripts
+## Setup & Run Locally
 
-In the project directory, you can run:
+### Installing Dependencies
 
-### `npm start`
+First make sure you have Node.js and npm installed.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Run the following command: `npm install`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This will install all the nessary dependancy as descibed in `package.json`.
 
-### `npm test`
+### Running Locally
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Once you have all the dependencies installed you can run the following command to start the local development server: `npm start`
 
-### `npm run build`
+This should automatically open a tab to `http://localhost:3000/cse421-pokeapp` on your default browser.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+From there, do not close the terminal as it will stop the development server. However, if you want to end the server you can do that or press Ctrl + C in the terminal to force quit the process.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You can start making changes, any changes saved to the project will automatically update on the development server. No need to keep restarting the server or refresh the browser.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Deploying to Github Pages
 
-### `npm run eject`
+On your current branch, make sure that you have your changes committed.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Run the following command: `npm run deploy`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This will push your current changes to the `gh-pages` branch which will make the active site match your branch.

@@ -1,5 +1,5 @@
 import { Rectangle } from 'react-rough'
-import LiveRough from './LiveRough'
+import ReactRoughAnimated from './ReactRoughAnimated'
 import { useState, useRef } from 'react'
 import Color from 'color'
 import { animate } from "framer-motion"
@@ -24,7 +24,7 @@ export default function RoughScrollContainer({ children, width = 400, height = 4
 
     return (
         <div style={{ width: containerSize.width + 'px', height: containerSize.height + 'px', ...style }}>
-            <LiveRough
+            <ReactRoughAnimated
                 width={containerSize.width}
                 height={containerSize.height} >
                 <Rectangle
@@ -45,7 +45,7 @@ export default function RoughScrollContainer({ children, width = 400, height = 4
                     width={ScrollbarWidth}
                     height={ScrollbarSize}
                     fill={'#00000000'} />
-            </LiveRough>
+            </ReactRoughAnimated>
             <div style={{ 'position': 'relative', }}>
                 <div ref={containerRef} style={{
                     position: 'absolute',

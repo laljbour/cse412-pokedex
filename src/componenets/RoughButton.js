@@ -1,8 +1,10 @@
-import { Rectangle } from 'react-rough'
-import LiveRough from './LiveRough'
-import { useState } from 'react'
-import Color from 'color'
-import { animate } from "framer-motion"
+import { useState } from 'react';
+
+import { Rectangle } from 'react-rough';
+import ReactRoughAnimated from './ReactRoughAnimated';
+
+import Color from 'color';
+import { animate } from "framer-motion";
 
 export default function RoughButton({ label, width = 150, height = 50, fill = Color('#dddddd'), outline = Color("black"), style }) {
     const [offset, setOffset] = useState(0)
@@ -37,7 +39,7 @@ export default function RoughButton({ label, width = 150, height = 50, fill = Co
 
     return (
         <div style={{width: containerSize.width + 'px', height: containerSize.height + 'px', ...style}}>
-            <LiveRough
+            <ReactRoughAnimated
                 width={containerSize.width}
                 height={containerSize.height}>
                 <Rectangle
@@ -61,7 +63,7 @@ export default function RoughButton({ label, width = 150, height = 50, fill = Co
                     height={height + 0.2 + Math.max(ButtonOffset - offset, 0)}
                     fill={'#00000000'}
                     stroke={pressed ? Color("blue") : outline} />
-            </LiveRough>
+            </ReactRoughAnimated>
             <div style={{ 'position': 'relative', }}>
                 <span style={{
                     'position': 'absolute',

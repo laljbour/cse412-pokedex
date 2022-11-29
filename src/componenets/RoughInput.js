@@ -1,5 +1,5 @@
 import { Rectangle } from 'react-rough'
-import LiveRough from './LiveRough'
+import ReactRoughAnimated from './ReactRoughAnimated'
 import { useState, useEffect } from 'react'
 import Color from 'color'
 import { animate } from "framer-motion"
@@ -28,7 +28,7 @@ export default function RoughInput({ children, width = 400, height = 40, fill = 
 
     return (
         <div style={{width: containerSize.width + 'px', height: containerSize.height + 'px', ...style}}>
-            <LiveRough
+            <ReactRoughAnimated
                 width={containerSize.width}
                 height={containerSize.height} >
                 <Rectangle
@@ -47,7 +47,7 @@ export default function RoughInput({ children, width = 400, height = 40, fill = 
                     strokeWidth={focus ? 2 : 0}
                     strokeLineDash={[10, 8]}
                     strokeLineDashOffset={offset} />
-            </LiveRough>
+            </ReactRoughAnimated>
             <input
                 onFocus={handleFocus}
                 onBlur={handleBlur}

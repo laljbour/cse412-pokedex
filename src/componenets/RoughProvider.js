@@ -1,26 +1,26 @@
-import { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 
 const RoughContext = createContext(null);
 
-export function RoughProvider({ children }) {
-  const [switchRough, setSwitchRough] = useState(false)
+export function RoughProvider({ children, toggleDelay = 200 }) {
+  const [roughToggle, setRoughToggle] = useState(false);
 
-  let timer
-  const updateSwitch = () => {
+  let timer;
+  const setToggleInterval = () => {
     timer = !timer && setInterval(() => {
-      setSwitchRough(prevSwitch => !prevSwitch)
-    }, 200)
-  }
+      setRoughToggle(prev => !prev);
+    }, toggleDelay);
+  };
 
   useEffect(() => {
-    updateSwitch()
-  
-    return () => clearInterval(timer)
+    setToggleInterval();
+
+    return () => clearInterval(timer);
   })
 
   return (
-    <RoughContext.Provider value={switchRough}>
-        {children}
+    <RoughContext.Provider value={roughToggle}>
+      {children}
     </RoughContext.Provider>
   );
 }

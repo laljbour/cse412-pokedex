@@ -1,0 +1,116 @@
+@font-face {
+  font-family: 'OMORI_GAME';
+  src: local('OMORI_GAME'), url(./fonts/OMORI_GAME.ttf) format('opentype');
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: #000;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+* {
+  font-family: 'OMORI_GAME', Arial;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.blue-text {
+  color: blue;
+}
+
+
+.r-3 {
+  width: 30px;
+}
+.r-4 {
+  width: 40px;
+}
+.r-5 {
+  width: 50px;
+}
+
+
+.c-2 {
+  height: 20px;
+}
+.c-3 {
+  height: 30px;
+}
+.c-4 {
+  height: 40px;
+}
+.c-5 {
+  height: 50px;
+}
+
+p {
+  margin: 0%;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2em;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+input {
+  border: none;
+  background-color: transparent;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+*:focus {
+  outline: none;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-flex-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.fill-container {
+  width: 100%;
+  height: 100%;
+}
+
+.vh-10 {
+  height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  /* make scrollbar transparent */
+}

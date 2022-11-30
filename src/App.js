@@ -11,7 +11,7 @@ import Color from 'color';
 
 export default function App() {
   const [pokemon, setPokemon] = useState({});
-  const [level, setLevel] = useState(25);
+  const [level, setLevel] = useState(Math.floor(Math.random() * (100 - 1 + 1) + 1));
   const [imageUrl, setImageUrl] = useState(null);
 
   const [search, setSearch] = useState('');
@@ -23,6 +23,7 @@ export default function App() {
       const url = URL.createObjectURL(data);
       setImageUrl(url);
     } catch (error) {
+
       console.log('Error downloading image: ', error.message);
     }
   };
@@ -36,6 +37,7 @@ export default function App() {
     if (error && status !== 406) throw error;
     if (data) {
       setPokemon(data);
+      setLevel(Math.floor(Math.random() * (100 - 1 + 1) + 1));
       var pokemon_name = data.name.toLowerCase();
       downloadImage(pokemon_name + '.png');
     }

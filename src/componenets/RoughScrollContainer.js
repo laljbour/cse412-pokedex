@@ -1,59 +1,70 @@
-import { Rectangle } from 'react-rough'
-import ReactRoughAnimated from './ReactRoughAnimated'
-import { useState, useRef } from 'react'
-import Color from 'color'
-import { animate } from "framer-motion"
+import { useState, useRef } from 'react';
 
-export default function RoughScrollContainer({ children, width = 400, height = 400, fill = Color("white"), style }) {
-    const [scrollPosition, setScrollPosition] = useState(0)
+import { Rectangle } from 'react-rough';
+import ReactRoughAnimated from './ReactRoughAnimated';
+
+import Color from 'color';
+
+export default function RoughScrollContainer({
+    children,
+    width = 400,
+    height = 400,
+    ScrollbarWidth = 16,
+    ScrollbarSize = 32,
+    scrollbarFill = Color("gray"),
+    scrollbarMarkerFill = Color("blue"),
+    scrollbarPadding = 0,
+    contentMargin = 32.0,
+    style
+}) {
+    const [scrollPosition, setScrollPosition] = useState(0);
     const containerRef = useRef(null);
-    const ScrollbarWidth = 8
-    const ScrollbarSize = 64
-    const OutlineMargin = 8.0
-    const ContentMargin = 16.0
-    const containerSize = {
-        width: width + (OutlineMargin * 2),
-        height: height + (OutlineMargin * 2)
-    }
 
     const handleScroll = () => {
         const scrollTop = containerRef.current.scrollTop
-        const scrollTopMax = containerRef.current.scrollHeight - (height - (ContentMargin * 2))
+        const scrollTopMax = containerRef.current.scrollHeight - (height - (contentMargin * 2))
         setScrollPosition(scrollTop / scrollTopMax)
-    }
+    };
+
+    const RoughMargin = 16.0;
+    const RightOffset = - ScrollbarWidth - (scrollbarPadding / 2);
 
     return (
-        <div style={{ width: containerSize.width + 'px', height: containerSize.height + 'px', ...style }}>
+        <div style={{ width: width + 'px', height: height + 'px', ...style }}>
             <ReactRoughAnimated
-                width={containerSize.width}
-                height={containerSize.height} >
+                width={width}
+                height={height}
+                margin={RoughMargin}>
                 <Rectangle
-                    x={OutlineMargin}
-                    y={OutlineMargin}
+                    x={RoughMargin} y={RoughMargin}
                     width={width}
                     height={height}
                     fill={'#00000000'} />
                 <Rectangle
-                    x={OutlineMargin + width - ScrollbarWidth - ContentMargin}
-                    y={OutlineMargin + ContentMargin}
+                    x={RoughMargin + width + RightOffset}
+                    y={RoughMargin + (scrollbarPadding / 2)}
                     width={ScrollbarWidth}
-                    height={height - (ContentMargin * 2)}
-                    fill={'#00000000'} />
+                    height={height - scrollbarPadding}
+                    fill={scrollbarFill} />
                 <Rectangle
-                    x={OutlineMargin + width - ScrollbarWidth - ContentMargin}
-                    y={OutlineMargin + ContentMargin + (scrollPosition * (height - (ContentMargin * 2) - ScrollbarSize - ScrollbarWidth) + ScrollbarWidth)}
+                    x={RoughMargin + width + RightOffset}
+                    y={RoughMargin + (scrollbarPadding / 2) + (height - scrollbarPadding - ScrollbarSize) * scrollPosition}
                     width={ScrollbarWidth}
                     height={ScrollbarSize}
-                    fill={'#00000000'} />
+                    fill={scrollbarMarkerFill} />
             </ReactRoughAnimated>
-            <div style={{ 'position': 'relative', }}>
+            <div style={{
+                position: 'relative',
+                top: -height + 'px',
+            }}>
                 <div ref={containerRef} style={{
                     position: 'absolute',
-                    width: width - (ContentMargin * 3) - ScrollbarWidth + 'px',
-                    height: height - (ContentMargin * 2) + 'px',
-                    left: OutlineMargin + ContentMargin + 'px',
-                    top: OutlineMargin + ContentMargin + 'px',
-                    overflowY: 'scroll'
+                    width: width - contentMargin + RightOffset + 'px',
+                    height: height - contentMargin + 'px',
+                    left: contentMargin / 2 + 'px',
+                    top: contentMargin / 2 + 'px',
+                    overflowY: 'scroll',
+                    overflowWrap: 'anywhere',
                 }} onScroll={handleScroll}>
                     {children}
                 </div>

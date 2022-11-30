@@ -1,62 +1,71 @@
-import { Rectangle } from 'react-rough'
-import ReactRoughAnimated from './ReactRoughAnimated'
-import { useState, useEffect } from 'react'
-import Color from 'color'
-import { animate } from "framer-motion"
+import { useState, useEffect } from 'react';
 
-export default function RoughInput({ children, width = 400, height = 40, fill = Color("white"), style }) {
-    const [offset, setOffset] = useState(0)
-    const [focus, setFocus] = useState(false)
+import { Rectangle } from 'react-rough';
+import ReactRoughAnimated from './ReactRoughAnimated';
 
-    const OutlineMargin = 8.0
-    const FocusMargin = 4.0
-    const containerSize = {
-        width: width + (OutlineMargin * 2),
-        height: height + (OutlineMargin * 2)
-    }
+import Color from 'color';
+import { animate } from "framer-motion";
 
-    const handleFocus = () => setFocus(true)
-    const handleBlur = () => setFocus(false)
+export default function RoughInput({
+    children,
+    onChange,
+    width = 400,
+    height = 40,
+    fill = Color("white"),
+    textMargin = 16.0,
+    focusOutlineColor = Color('#00CCCC'),
+    focusOutlineOffset = 4.0,
+    focusOutlineSpeed = 1.0,
+    style
+}) {
+    const [offset, setOffset] = useState(0);
+    const [focus, setFocus] = useState(false);
+
+    const handleFocus = () => setFocus(true);
+    const handleBlur = () => setFocus(false);
 
     useEffect(() => {
-        animate(0, 18, {
+        animate(0, 18 / focusOutlineSpeed, {
             onUpdate: v => setOffset(v),
             repeat: Infinity,
             ease: "linear",
-        })
-    }, [])
+        });
+    }, []);
+
+    const RoughMargin = 16.0;
 
     return (
-        <div style={{width: containerSize.width + 'px', height: containerSize.height + 'px', ...style}}>
+        <div style={{ width: width + 'px', height: height + 'px', ...style }}>
             <ReactRoughAnimated
-                width={containerSize.width}
-                height={containerSize.height} >
+                width={width}
+                height={height}
+                margin={RoughMargin}>
                 <Rectangle
-                    x={OutlineMargin}
-                    y={OutlineMargin}
+                    x={RoughMargin} y={RoughMargin}
                     width={width}
                     height={height}
                     fill={fill} />
                 <Rectangle
-                    x={OutlineMargin + FocusMargin}
-                    y={OutlineMargin + FocusMargin}
-                    width={width - (FocusMargin * 2)}
-                    height={height - (FocusMargin * 2)}
+                    x={RoughMargin + focusOutlineOffset}
+                    y={RoughMargin + focusOutlineOffset}
+                    width={width - (focusOutlineOffset * 2)}
+                    height={height - (focusOutlineOffset * 2)}
                     fill={'#00000000'}
-                    stroke={focus ? '#00CCCC' : '#00000000'}
+                    stroke={focus ? focusOutlineColor : '#00000000'}
                     strokeWidth={focus ? 2 : 0}
                     strokeLineDash={[10, 8]}
                     strokeLineDashOffset={offset} />
             </ReactRoughAnimated>
             <input
+                onChange={onChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 style={{
-                    'position': 'relative',
-                    'top': `${OutlineMargin}px`,
-                    'left': `${OutlineMargin}px`,
-                    'width': `${width}px`,
-                    'height': `${height}px`
+                    top: -height + 'px',
+                    padding: (textMargin / 2),
+                    position: 'relative',
+                    width: width - textMargin + 'px',
+                    height: height - textMargin + 'px',
                 }}>
                 {children}
             </input>

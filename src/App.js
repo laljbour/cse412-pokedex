@@ -30,13 +30,14 @@ export default function App() {
   const getPokemon = async (no = 213) => {
     let { data, error, status } = await supabase
       .from('pokemon')
-      .select(`name, image, type_1, hp, attack, defense, sp_atk, sp_def`)
+      .select(`name, type_1, hp, attack, defense, sp_atk, sp_def`)
       .eq('no', no)
       .single();
     if (error && status !== 406) throw error;
     if (data) {
       setPokemon(data);
-      downloadImage(data.image);
+      var pokemon_name = data.name.toLowerCase();
+      downloadImage(pokemon_name + '.png');
     }
   };
 
@@ -82,7 +83,7 @@ export default function App() {
                 Sp. Attack: <span className='blue-text'>{pokemon.sp_atk}</span>
                 <br />
                 Sp. Defense: <span className='blue-text'>{pokemon.sp_def}</span>
-                
+
               </p>
             </RoughScrollContainer>
             <p style={{ position: 'absolute', left: '40px', top: '40px' }}>{'A wild '}<span style={{ color: Color("blue") }}>{pokemon.name}</span>{' has appeared!'}</p>

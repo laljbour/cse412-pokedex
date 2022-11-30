@@ -36,8 +36,16 @@ export default function App() {
       .single();
     if (error && status !== 406) throw error;
     if (data) {
+      var pokemon_level = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+      console.log(typeof(data.hp));
+      data.hp = Math.round(((pokemon_level - 1) * 0.02 + 1) * data.hp);
+      data.attack = Math.round(((pokemon_level - 1) * 0.02 + 1) * data.attack);
+      data.defense = Math.round(((pokemon_level - 1) * 0.02 + 1) * data.defense);
+      data.sp_atk = Math.round(((pokemon_level - 1) * 0.02 + 1) * data.sp_atk);
+      data.sp_def = Math.round(((pokemon_level - 1) * 0.02 + 1) * data.sp_def);
+
       setPokemon(data);
-      setLevel(Math.floor(Math.random() * (100 - 1 + 1) + 1));
+      setLevel(pokemon_level);
       var pokemon_name = data.name.toLowerCase();
       downloadImage(pokemon_name + '.png');
     }

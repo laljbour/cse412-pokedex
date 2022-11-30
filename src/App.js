@@ -23,7 +23,7 @@ export default function App() {
       const url = URL.createObjectURL(data);
       setImageUrl(url);
     } catch (error) {
-
+      setImageUrl('https://lttlwinkcupntrqnzeys.supabase.co/storage/v1/object/public/pokemon/logo.png');
       console.log('Error downloading image: ', error.message);
     }
   };

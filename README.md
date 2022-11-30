@@ -8,7 +8,7 @@ This project was created for the class CSE412.
 
 First make sure you have Node.js and npm installed.
 
-Run the following command: `npm install`
+Run the following command: `npm install -f`
 
 This will install all the nessary dependancy as descibed in `package.json`.
 
@@ -16,7 +16,7 @@ This will install all the nessary dependancy as descibed in `package.json`.
 
 Once you have all the dependencies installed you can run the following command to start the local development server: `npm start`
 
-This should automatically open a tab to `http://localhost:3000/cse421-pokeapp` on your default browser.
+This should automatically open a tab to `http://localhost:3000/cse412-pokedex/` on your default browser.
 
 From there, do not close the terminal as it will stop the development server. However, if you want to end the server you can do that or press Ctrl + C in the terminal to force quit the process.
 

@@ -1,7 +1,7 @@
 {
-  "name": "cse421-pokemon-database",
+  "name": "cse412-pokedex",
   "version": "0.1.0",
-  "homepage": "https://laljbour.github.io/cse421-pokeapp",
+  "homepage": "https://laljbour.github.io/cse412-pokedex",
   "private": true,
   "dependencies": {
     "@supabase/supabase-js": "^2.1.1",

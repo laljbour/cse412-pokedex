@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/cse421-pokeapp/static/css/main.bd81c473.css",
-    "main.js": "/cse421-pokeapp/static/js/main.15e56779.js",
+    "main.js": "/cse421-pokeapp/static/js/main.0f1917c5.js",
     "static/js/787.c37818d5.chunk.js": "/cse421-pokeapp/static/js/787.c37818d5.chunk.js",
     "static/media/OMORI_GAME.ttf": "/cse421-pokeapp/static/media/OMORI_GAME.a2f0cea811aeb48e3ef4.ttf",
     "index.html": "/cse421-pokeapp/index.html",
     "main.bd81c473.css.map": "/cse421-pokeapp/static/css/main.bd81c473.css.map",
-    "main.15e56779.js.map": "/cse421-pokeapp/static/js/main.15e56779.js.map",
+    "main.0f1917c5.js.map": "/cse421-pokeapp/static/js/main.0f1917c5.js.map",
     "787.c37818d5.chunk.js.map": "/cse421-pokeapp/static/js/787.c37818d5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bd81c473.css",
-    "static/js/main.15e56779.js"
+    "static/js/main.0f1917c5.js"
   ]
 }

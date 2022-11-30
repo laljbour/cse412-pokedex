@@ -1,6 +1,6 @@
-# CSE421 : Pokemon Catch Simulator
+# CSE412 : Pokemon Catch Simulator
 
-This project was created for the class CSE421.
+This project was created for the class CSE412.
 
 ## Setup & Run Locally
 

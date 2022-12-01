@@ -9,6 +9,7 @@ import { animate } from "framer-motion";
 export default function RoughInput({
     children,
     onChange,
+    onFocusChange,
     width = 400,
     height = 40,
     fill = Color("white"),
@@ -17,13 +18,23 @@ export default function RoughInput({
     focusOutlineOffset = 4.0,
     focusOutlineSpeed = 1.0,
     placeholderText,
+    text,
     style
 }) {
+    const [value, setValue] = useState("");
     const [offset, setOffset] = useState(0);
     const [focus, setFocus] = useState(false);
 
     const handleFocus = () => setFocus(true);
     const handleBlur = () => setFocus(false);
+
+    useEffect(() => {
+        if (value != text) setValue(text);
+    }, [text]);
+
+    useEffect(() => {
+        if (onFocusChange) onFocusChange(focus)
+    }, [focus]);
 
     useEffect(() => {
         animate(0, 18 / focusOutlineSpeed, {
@@ -58,7 +69,11 @@ export default function RoughInput({
                     strokeLineDashOffset={offset} />
             </ReactRoughAnimated>
             <input
-                onChange={onChange}
+                onChange={(e) => {
+                    setValue(e.target.value);
+                    if (onChange) onChange(e);
+                }}
+                value={value}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 placeholder={placeholderText}

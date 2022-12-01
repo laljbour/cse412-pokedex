@@ -56,13 +56,13 @@ export default function RoughButton({
                 width={width}
                 height={height}
                 margin={RoughMargin}>
-                <Rectangle
+                {buttonOffset == 0 ? null : <Rectangle
                     x={RoughMargin}
                     y={RoughMargin + buttonOffset}
                     width={width}
                     height={height - buttonOffset}
                     fill={fill.mix(Color("blue"), 0.2)}
-                    strokeWidth={0} />
+                    strokeWidth={0} />}
                 <Rectangle
                     x={RoughMargin}
                     y={RoughMargin + offset}

@@ -12,12 +12,14 @@ export default function ReactRoughAnimated({
     },
     width, height,
     margin = 16.0,
+    style
 }) {
     const [seed, setSeed] = useState(Math.floor(Math.random() * (100 - 1) + 1));
     const roughToggle = useRoughContext();
 
     return (
         <div style={{
+            ...style,
             margin: -margin+'px',
             width: width + (margin * 2) + 'px',
             height: height + (margin * 2) + 'px',

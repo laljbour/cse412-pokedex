@@ -11,6 +11,7 @@ import RoughScrollContainer from './componenets/RoughScrollContainer';
 import Color from 'color';
 import PokeballIcon from './componenets/PokeballIcon';
 import PokeballOptions from './componenets/PokeballOptions';
+import SearchBar from './componenets/SearchBar';
 
 export default function App() {
   const [pokemon, setPokemon] = useState(null);
@@ -33,11 +34,12 @@ export default function App() {
     }
   };
 
-  const getPokemon = async (no = 213) => {
+  const getPokemon = async (no = "Shuckle") => {
+    console.log(no);
     let { data, error, status } = await supabase
       .from('pokemon')
       .select(`name, type_1, hp, attack, defense, sp_atk, sp_def, catch_rate`)
-      .eq('no', no)
+      .eq('name', no)
       .single();
     if (error && status !== 406) throw error;
     if (data) {
@@ -91,10 +93,10 @@ export default function App() {
       <div className='center-flex-container vh-10'>
         <h1>Pokemon Catch Simulator</h1>
         <div className='c-2' />
-        <div className='row-container'>
-          <RoughInput onChange={(e) => setSearch(e.target.value)} height={50} placeholderText={'Pokemon No.'}></RoughInput>
+        <div className='row-container' style={{ position: 'relative', zIndex: 2 }}>
+          <SearchBar onChange={(v) => setSearch(v)}/>
           <div className='r-3' />
-          <RoughButton onClick={() => getPokemon(search)} label={'Load Pokemon'} width={200} height={50}></RoughButton>
+          <RoughButton onClick={() => getPokemon(search)} label={'Load Pokemon'} width={200} height={50}/>
         </div>
         <div className='c-2' />
         <div style={{ position: 'relative', }}>

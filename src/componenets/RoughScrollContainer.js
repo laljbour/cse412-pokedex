@@ -21,9 +21,9 @@ export default function RoughScrollContainer({
     const containerRef = useRef(null);
 
     const handleScroll = () => {
-        const scrollTop = containerRef.current.scrollTop
-        const scrollTopMax = containerRef.current.scrollHeight - (height - (contentMargin * 2))
-        setScrollPosition(scrollTop / scrollTopMax)
+        const scrollTop = containerRef.current.scrollTop;
+        const scrollTopMax = containerRef.current.scrollHeight - (height - (contentMargin * 2));
+        setScrollPosition(scrollTop / scrollTopMax);
     };
 
     const RoughMargin = 16.0;

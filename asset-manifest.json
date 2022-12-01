@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/cse412-pokedex/static/css/main.fe380968.css",
-    "main.js": "/cse412-pokedex/static/js/main.824538df.js",
+    "main.css": "/cse412-pokedex/static/css/main.2dbf25fb.css",
+    "main.js": "/cse412-pokedex/static/js/main.0ce1f845.js",
     "static/js/787.7e307337.chunk.js": "/cse412-pokedex/static/js/787.7e307337.chunk.js",
     "static/media/OMORI_GAME.ttf": "/cse412-pokedex/static/media/OMORI_GAME.a2f0cea811aeb48e3ef4.ttf",
     "index.html": "/cse412-pokedex/index.html",
-    "main.fe380968.css.map": "/cse412-pokedex/static/css/main.fe380968.css.map",
-    "main.824538df.js.map": "/cse412-pokedex/static/js/main.824538df.js.map",
+    "main.2dbf25fb.css.map": "/cse412-pokedex/static/css/main.2dbf25fb.css.map",
+    "main.0ce1f845.js.map": "/cse412-pokedex/static/js/main.0ce1f845.js.map",
     "787.7e307337.chunk.js.map": "/cse412-pokedex/static/js/787.7e307337.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fe380968.css",
-    "static/js/main.824538df.js"
+    "static/css/main.2dbf25fb.css",
+    "static/js/main.0ce1f845.js"
   ]
 }

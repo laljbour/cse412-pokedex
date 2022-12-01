@@ -7,12 +7,17 @@ import ReactRoughAnimated from './componenets/ReactRoughAnimated';
 import RoughInput from './componenets/RoughInput';
 import RoughButton from './componenets/RoughButton';
 import RoughScrollContainer from './componenets/RoughScrollContainer';
+
 import Color from 'color';
+import PokeballIcon from './componenets/PokeballIcon';
+import PokeballOptions from './componenets/PokeballOptions';
 
 export default function App() {
-  const [pokemon, setPokemon] = useState({});
+  const [pokemon, setPokemon] = useState(null);
   const [level, setLevel] = useState(Math.floor(Math.random() * (100 - 1 + 1) + 1));
   const [imageUrl, setImageUrl] = useState(null);
+  const [pokeball, setPokeball] = useState(-1);
+  const [isCaught, setIsCaught] = useState(0);
 
   const [search, setSearch] = useState('');
 
@@ -48,6 +53,8 @@ export default function App() {
       setLevel(pokemon_level);
       var pokemon_name = data.name.toLowerCase();
       downloadImage(pokemon_name + '.png');
+      setAnimationTrigger("none");
+      
     }
   };
 
@@ -56,13 +63,21 @@ export default function App() {
   }, []);
 
 
+  const [animationTrigger, setAnimationTrigger] = useState("");
+  useEffect(() => {
+    if (animationTrigger == "none") {
+      setAnimationTrigger("");
+    }
+  }, [animationTrigger]);
+  const messageBox = <p className='typewriter' style={{ position: 'absolute', left: '40px', top: '40px', animation: animationTrigger }}>{'A wild '}<span style={{ color: Color("blue") }}>{pokemon ? pokemon.name : ''}</span>{' has appeared!'}</p>;
+
   return (
     <RoughProvider>
       <div className='center-flex-container vh-10'>
         <h1>Pokemon Catch Simulator</h1>
         <div className='c-2' />
         <div className='row-container'>
-          <RoughInput onChange={(e) => setSearch(e.target.value)} height={50}></RoughInput>
+          <RoughInput onChange={(e) => setSearch(e.target.value)} height={50} placeholderText={'Pokemon No.'}></RoughInput>
           <div className='r-3' />
           <RoughButton onClick={() => getPokemon(search)} label={'Load Pokemon'} width={200} height={50}></RoughButton>
         </div>
@@ -82,29 +97,34 @@ export default function App() {
             <RoughScrollContainer width={220} height={260} style={{ position: 'absolute', right: '5%', top: '5%' }}>
               <p style={{ fontSize: '30px' }}>
                 <span style={{ textDecoration: 'underline', display: 'inline-block', width: '100%', textAlign: 'center' }}>STATS</span>
-                Type: <span className='blue-text'>{pokemon.type_1}</span>
+                Type: <span className='blue-text'>{pokemon ? pokemon.type_1 : ''}</span>
                 <br />
-                HP: <span className='blue-text'>{pokemon.hp}</span>
+                HP: <span className='blue-text'>{pokemon ? pokemon.hp : ''}</span>
                 <br />
-                Attack: <span className='blue-text'>{pokemon.attack}</span>
+                Attack: <span className='blue-text'>{pokemon ? pokemon.attack : ''}</span>
                 <br />
-                Defense: <span className='blue-text'>{pokemon.defense}</span>
+                Defense: <span className='blue-text'>{pokemon ? pokemon.defense : ''}</span>
                 <br />
-                Sp. Attack: <span className='blue-text'>{pokemon.sp_atk}</span>
+                Sp. Attack: <span className='blue-text'>{pokemon ? pokemon.sp_atk : ''}</span>
                 <br />
-                Sp. Defense: <span className='blue-text'>{pokemon.sp_def}</span>
+                Sp. Defense: <span className='blue-text'>{pokemon ? pokemon.sp_def : ''}</span>
 
               </p>
             </RoughScrollContainer>
-            <p style={{ position: 'absolute', left: '40px', top: '40px' }}>{'A wild '}<span style={{ color: Color("blue") }}>{pokemon.name}</span>{' has appeared!'}</p>
+            {pokemon ? messageBox : null}
             <div className='column-container' style={{ height: '100%', }}>
               <span>{"Level " + level}</span>
               <img
                 src={imageUrl ? imageUrl : `https://place-hold.it/${120}x${120}`}
-                className="avatar image"
-                style={{ height: 120 * 3, width: 120 * 3, }}
+                style={{ height: 120 * 3, width: 120 * 3, margin: -20+'px' }}
               />
-              <RoughButton label={'Catch!'}></RoughButton>
+              <span style={{ color: (isCaught == 1 ? Color("green") : Color("red")), }}>{isCaught == 0 ? '' : (isCaught == 1 ? 'CAPTURE SUCCESSFUL' : 'CAPTURE FAILED')}</span>
+              <div className='c-3' />
+              <div className={'row-container'} style={{justifyContent: 'right'}}>
+                <RoughButton label={'Catch!'}/>
+                <div className='r-2' />
+                <PokeballOptions onChange={setPokeball}/>
+              </div>
             </div>
           </div>
         </div>

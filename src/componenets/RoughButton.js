@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Rectangle } from 'react-rough';
 import ReactRoughAnimated from './ReactRoughAnimated';
@@ -15,29 +15,37 @@ export default function RoughButton({
     fill = Color('#dddddd'),
     outline = Color("black"),
     buttonOffset = 16.0,
+    toggle,
     style
 }) {
     const [offset, setOffset] = useState(0);
-    const [pressed, setPressed] = useState(false);
+    const [pressed, setPressed] = useState(toggle != undefined ? toggle : false);
 
-    const handleMouseDown = () => {
-        setPressed(true)
-        animate(offset, buttonOffset, {
+    const handleMouseDown = () => setPressed(true);
+    const handleMouseUp = () => setPressed(false);
+
+    useEffect(() => {
+        const controls = animate(offset, pressed ? buttonOffset : 0, {
+            duration: pressed ? 0.1 : 1.0,
             type: "spring",
             onUpdate: v => setOffset(v),
-        })
-    };
-    const handleMouseUp = () => {
-        if (pressed) {
-            setPressed(false)
-            animate(offset, 0, {
-                type: "spring",
-                onUpdate: v => setOffset(v),
-            })
+        });
+        return controls.stop;
+    }, [pressed])
+
+    useEffect(() => {
+        if (toggle != undefined) {
+            setPressed(toggle);
         }
-    };
+    }, [toggle]);
 
     const handleMouseLeave = () => handleMouseUp();
+
+    const childrenWithProps = React.Children.map(children, child => {
+        if (React.isValidElement(child))
+            return React.cloneElement(child, { width: width, height: height - buttonOffset, y: offset });
+        return child;
+    });
 
     const RoughMargin = 16.0;
     const OutlinePadding = 3;
@@ -71,12 +79,12 @@ export default function RoughButton({
                     stroke={pressed ? Color("blue") : outline} />
             </ReactRoughAnimated>
             <button
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseLeave}
-                onClick={onClick}
+                onMouseDown={toggle != undefined ? () => { } : handleMouseDown}
+                onMouseUp={toggle != undefined ? () => { } : handleMouseUp}
+                onMouseLeave={toggle != undefined ? () => { } : handleMouseLeave}
+                onClick={() => { if (toggle != undefined) setPressed(!pressed); if (onClick) onClick(); }}
                 style={{
-                    top: -height+'px',
+                    top: -height + 'px',
                     position: 'relative',
                     width: width + 'px',
                     height: height + 'px',
@@ -90,11 +98,11 @@ export default function RoughButton({
                     width: width + 'px',
                     height: height - buttonOffset + 'px',
                     display: 'flex',
-                    top: offset+'px',
+                    top: offset + 'px',
                 }}>
                     {label}
                 </span>
-                {children}
+                {childrenWithProps}
             </button>
 
         </div>

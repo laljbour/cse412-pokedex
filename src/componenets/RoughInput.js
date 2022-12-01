@@ -13,9 +13,10 @@ export default function RoughInput({
     height = 40,
     fill = Color("white"),
     textMargin = 16.0,
-    focusOutlineColor = Color('#00CCCC'),
+    focusOutlineColor = Color('blue'),
     focusOutlineOffset = 4.0,
     focusOutlineSpeed = 1.0,
+    placeholderText,
     style
 }) {
     const [offset, setOffset] = useState(0);
@@ -60,6 +61,7 @@ export default function RoughInput({
                 onChange={onChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                placeholder={placeholderText}
                 style={{
                     top: -height + 'px',
                     padding: (textMargin / 2),

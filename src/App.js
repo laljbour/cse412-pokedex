@@ -38,7 +38,7 @@ export default function App() {
     console.log(no);
     let { data, error, status } = await supabase
       .from('pokemon')
-      .select(`name, type_1, hp, attack, defense, sp_atk, sp_def`)
+      .select(`name, type_1, hp, attack, defense, sp_atk, sp_def, catch_rate`)
       .eq('name', no)
       .single();
     if (error && status !== 406) throw error;
@@ -49,20 +49,36 @@ export default function App() {
       data.defense = Math.round(((pokemon_level - 1) * 0.02 + 1) * data.defense);
       data.sp_atk = Math.round(((pokemon_level - 1) * 0.02 + 1) * data.sp_atk);
       data.sp_def = Math.round(((pokemon_level - 1) * 0.02 + 1) * data.sp_def);
-
+      data.level = pokemon_level;
       setPokemon(data);
       setLevel(pokemon_level);
       var pokemon_name = data.name.toLowerCase();
       downloadImage(pokemon_name + '.png');
       setAnimationTrigger("none");
-      
     }
+  };
+
+  const catchPokemon = async () => {
+    var ball_buff = -1;
+    if (pokeball == -1)
+      ball_buff = 0;
+    else if (pokeball == 0)
+      ball_buff = 1;
+    else if (pokeball == 1)
+      ball_buff = 1.5;
+    else
+      ball_buff = 2;
+    var final_catch_rate = pokemon.catch_rate / (2 * pokemon.level);
+    final_catch_rate = final_catch_rate > 1 ? 1 : final_catch_rate;
+    var success_rate = 1 - Math.pow(1 - final_catch_rate, ball_buff);
+    var random_number = Math.random();
+    if (random_number <= success_rate) setIsCaught(1);
+    else setIsCaught(-1);
   };
 
   useEffect(() => {
     getPokemon();
   }, []);
-
 
   const [animationTrigger, setAnimationTrigger] = useState("");
   useEffect(() => {
@@ -109,6 +125,8 @@ export default function App() {
                 Sp. Attack: <span className='blue-text'>{pokemon ? pokemon.sp_atk : ''}</span>
                 <br />
                 Sp. Defense: <span className='blue-text'>{pokemon ? pokemon.sp_def : ''}</span>
+                <br />
+                Catch Rate: <span className='blue-text'>{pokemon ? pokemon.catch_rate : ''}</span>
 
               </p>
             </RoughScrollContainer>
@@ -122,7 +140,7 @@ export default function App() {
               <span style={{ color: (isCaught == 1 ? Color("green") : Color("red")), }}>{isCaught == 0 ? '' : (isCaught == 1 ? 'CAPTURE SUCCESSFUL' : 'CAPTURE FAILED')}</span>
               <div className='c-3' />
               <div className={'row-container'} style={{justifyContent: 'right'}}>
-                <RoughButton label={'Catch!'}/>
+                <RoughButton onClick={() => catchPokemon()} label={'Catch!'}/>
                 <div className='r-2' />
                 <PokeballOptions onChange={setPokeball}/>
               </div>
